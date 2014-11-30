@@ -37,7 +37,7 @@ ppoutreach.service('userdata', function() {
         surname: '',
         school: '',
         email: '',
-        progress: 6
+        progress: '6'
     };
     
     return {
@@ -117,15 +117,9 @@ ppoutreach.directive('chart', function($http) {
         		$scope.dataNew = [];
         		angular.forEach(data, function(value) {
         			$scope.dataNew.push(["Mgg",value]);
-        			//console.log(value.pt);
      			});
      			dataHist.addRows($scope.dataNew);
      			
-     			// Set chart options
-            	/*var options = {'title':'Dinosaur Lengths',
-          				legend: { position: 'none' },
-                        'width':700,
-                        'height':500};*/
 				var dashboard = new google.visualization.Dashboard(
             		document.getElementById('dashboard_div'));
             	
@@ -149,11 +143,6 @@ ppoutreach.directive('chart', function($http) {
 
 				dashboard.bind(lengthRangeSlider, Chart);
 				dashboard.draw(dataHist);
-
-           	 // Instantiate and draw our chart, passing in some options.
-            /*var chart = new google.visualization.Histogram($elm[0]);
-            chart.draw(dataHist, options);*/
-            });
             
           }
       }
@@ -162,9 +151,5 @@ ppoutreach.directive('chart', function($http) {
 var ButtonsCtrl = function ($scope) {
 
   $scope.radioModel = 'Remove';
-
-};
-
-var LoginButtonsCtrl = function ($scope) {
 
 };

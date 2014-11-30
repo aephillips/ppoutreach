@@ -29,32 +29,52 @@ ppoutreach.config(function($routeProvider) {
 			});
 });
 
-ppoutreach.controller('mainController', function($scope) {
-		
-	$scope.data = {
-        fields: [
-            { key:"Username", val: "tomstevo" },
-            { key:"Firstname", val: "Tom" },
-            { key:"Surname", val: "Stevenson"},
-            { key:"School", val: "pprc"},
-            { key:"Email", val: "email"},
-        ],
+ppoutreach.service('userdata', function() {
+    var stringValue = 'test string value';
+    var objectValue = {
+        username: '',
+        firstname: '',
+        surname: '',
+        school: '',
+        email: '',
         progress: 6
-    }; 
+    };
     
+    return {
+        getString: function() {
+            return stringValue;
+        },
+        setString: function(value) {
+            stringValue = value;
+        },
+        getObject: function() {
+            return objectValue;
+        }
+    }
 });
 
-ppoutreach.controller('profileController', function($scope, $http) {
+ppoutreach.controller('mainController', function($scope, userdata, $location) {
 
-	$scope.data = {
-        fields: [
-            { key:"Username", val: "tomstevo" },
-            { key:"Firstname", val: "Tom" },
-            { key:"Surname", val: "Stevenson"},
-            { key:"School", val: "pprc"},
-            { key:"Email", val: "email"},
-        ],
-        progress: 6
+	$scope.stringValue = userdata.getString;
+    $scope.objectValue = userdata.getObject();
+    $scope.setString = function(newValue) {
+        $scope.objectValue.username = newValue;
+        userdata.setString(newValue);
+    };
+    
+    $scope.go = function(path) {
+  		$location.path(path);
+	};
+
+});
+
+ppoutreach.controller('profileController', function($scope, userdata) {
+	
+	$scope.stringValue = userdata.getString;
+    $scope.objectValue = userdata.getObject();
+    $scope.setString = function(newValue) {
+        $scope.objectValue.username = newValue;
+        userdata.setString(newValue);
     };
 
 });
